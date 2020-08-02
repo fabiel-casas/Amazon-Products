@@ -4,5 +4,5 @@ import com.fabiel.casas.amazon_products.data.config.ApiResult
 import com.fabiel.casas.amazon_products.data.models.Product
 
 interface AmazonProductsRepository {
-    suspend fun getAmazonProducts(): ApiResult<List<Product>>
+    suspend fun getAmazonProducts(search: String): ApiResult<List<Product>>
 }

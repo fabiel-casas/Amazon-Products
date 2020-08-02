@@ -7,7 +7,7 @@ import com.fabiel.casas.amazon_products.data.repository.AmazonProductsRepository
 class AmazonProductsUseCaseImpl(
     private val repository: AmazonProductsRepository
 ) : AmazonProductsUseCase {
-    override suspend fun invoke(): ApiResult<List<Product>> {
-        return repository.getAmazonProducts()
+    override suspend fun invoke(search: String): ApiResult<List<Product>> {
+        return repository.getAmazonProducts(search)
     }
 }

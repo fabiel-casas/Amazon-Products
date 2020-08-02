@@ -9,8 +9,8 @@ import java.lang.Exception
 
 class AmazonProductsRepositoryImpl : AmazonProductsRepository {
     private val repository = RetrofitServiceBuilder.buildService(AmazonProducts::class.java)
-    override suspend fun getAmazonProducts(): ApiResult<List<Product>> {
-        val result = repository.listAmazonProducts().executeAsSuspended()
+    override suspend fun getAmazonProducts(search: String): ApiResult<List<Product>> {
+        val result = repository.listAmazonProducts(search).executeAsSuspended()
         return when(result) {
             is ApiResult.Success -> ApiResult.Success(result.data.products)
             else -> ApiResult.Error(Exception())

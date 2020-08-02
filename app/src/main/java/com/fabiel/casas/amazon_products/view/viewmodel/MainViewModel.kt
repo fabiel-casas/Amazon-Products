@@ -15,9 +15,9 @@ class MainViewModel : ViewModel() {
     val productListError: MutableLiveData<String> = MutableLiveData()
     val productList: MutableLiveData<List<Product>> = MutableLiveData()
 
-    fun getProducts() {
+    fun getProducts(search: String = "") {
         viewModelScope.launch(Dispatchers.Default) {
-            val result = useCase.invoke()
+            val result = useCase.invoke(search)
             when(result) {
                 is ApiResult.Success -> productList.postValue(result.data)
                 else -> productListError.postValue("Apologies this services is not available right now.")
