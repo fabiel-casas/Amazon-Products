@@ -40,9 +40,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = ProductAdapter()
         model.productList.observe(this, Observer {
             productsRecyclerView.isVisible = true
+            progressBar.isVisible = false
             adapter.setItems(it)
         })
         model.productListError.observe(this, Observer {
+            progressBar.isVisible = false
             productsRecyclerView.isVisible = false
             Snackbar.make(productsRecyclerView, it, Snackbar.LENGTH_LONG).show()
         })
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         model.getProducts()
+        progressBar.isVisible = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         override fun onQueryTextSubmit(query: String): Boolean {
             searchItem.collapseActionView()
             model.getProducts(query)
+            progressBar.isVisible = true
             return true
         }
 
